@@ -1,0 +1,10 @@
+Cashier implementation for NextTail kata by Fabián Dios Rodas
+
+Domain entities:
+ - Product: Transfer object for products.
+ - Discount: Transfer object for discounts. It was modeled this way to make easier the final prices and also support both type of discounts. (2x1 or 1€ discount if more than n units)
+
+Business Logic:
+ - CartManager: manages input from a product into the cart as also the quantity of each product. Can also manage different carts.
+ Extra information: Interface design pattern with an in memory implementation. In an real scenario I would suggest for example a redis implementation.
+ - Cashier: public service for managing product insert into carts as its price after evaluating possible discounts. As required, has a public scan method and also receives a discount list in the constructor.
