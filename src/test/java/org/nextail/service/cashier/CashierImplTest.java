@@ -27,24 +27,24 @@ public class CashierImplTest {
 
     @Test(expected = InvalidParameterException.class)
     public void cartId_must_not_be_null_when_adding_new_product() {
-        cashier.addProduct(ProductGenerator.getVoucher(), null);
+        cashier.scan(ProductGenerator.getVoucher(), null);
     }
 
     @Test(expected = InvalidParameterException.class)
     public void cartId_must_not_be_empty_when_adding_new_product() {
-        cashier.addProduct(ProductGenerator.getVoucher(), "");
+        cashier.scan(ProductGenerator.getVoucher(), "");
     }
 
     @Test(expected = InvalidParameterException.class)
     public void product_must_not_be_null_when_adding_new_product() {
-        cashier.addProduct(null, generateCartId());
+        cashier.scan(null, generateCartId());
     }
 
     @Test
     public void cart_price_should_be_product_price_when_only_one_product_is_added(){
         Product pants = ProductGenerator.getPants();
 
-        Float cartPrice = cashier.addProduct(pants, generateCartId());
+        Float cartPrice = cashier.scan(pants, generateCartId());
 
         assertEquals(Float.valueOf(7.5F), cartPrice);
     }
@@ -54,11 +54,11 @@ public class CashierImplTest {
         Product pants = ProductGenerator.getPants();
 
         String cartId = generateCartId();
-        cashier.addProduct(pants, cartId);
-        cashier.addProduct(pants, cartId);
-        cashier.addProduct(pants, cartId);
-        cashier.addProduct(pants, cartId);
-        Float cartPrice = cashier.addProduct(pants, cartId);
+        cashier.scan(pants, cartId);
+        cashier.scan(pants, cartId);
+        cashier.scan(pants, cartId);
+        cashier.scan(pants, cartId);
+        Float cartPrice = cashier.scan(pants, cartId);
 
         assertEquals(Float.valueOf(37.5F), cartPrice);
     }
@@ -68,8 +68,8 @@ public class CashierImplTest {
         Product tshirt = ProductGenerator.getTshirt();
 
         String cartId = generateCartId();
-        cashier.addProduct(tshirt, cartId);
-        Float cartPrice = cashier.addProduct(tshirt, cartId);
+        cashier.scan(tshirt, cartId);
+        Float cartPrice = cashier.scan(tshirt, cartId);
 
         assertEquals(Float.valueOf(40F), cartPrice);
     }
@@ -79,9 +79,9 @@ public class CashierImplTest {
         Product tshirt = ProductGenerator.getTshirt();
 
         String cartId = generateCartId();
-        cashier.addProduct(tshirt, cartId);
-        cashier.addProduct(tshirt, cartId);
-        Float cartPrice = cashier.addProduct(tshirt, cartId);
+        cashier.scan(tshirt, cartId);
+        cashier.scan(tshirt, cartId);
+        Float cartPrice = cashier.scan(tshirt, cartId);
 
         assertEquals(Float.valueOf(57F), cartPrice);
     }
@@ -91,12 +91,12 @@ public class CashierImplTest {
         Product tshirt = ProductGenerator.getTshirt();
 
         String cartId = generateCartId();
-        cashier.addProduct(tshirt, cartId);
-        cashier.addProduct(tshirt, cartId);
-        cashier.addProduct(tshirt, cartId);
-        cashier.addProduct(tshirt, cartId);
-        cashier.addProduct(tshirt, cartId);
-        Float cartPrice = cashier.addProduct(tshirt, cartId);
+        cashier.scan(tshirt, cartId);
+        cashier.scan(tshirt, cartId);
+        cashier.scan(tshirt, cartId);
+        cashier.scan(tshirt, cartId);
+        cashier.scan(tshirt, cartId);
+        Float cartPrice = cashier.scan(tshirt, cartId);
 
         assertEquals(Float.valueOf(114F), cartPrice);
     }
@@ -106,9 +106,9 @@ public class CashierImplTest {
         Product voucher = ProductGenerator.getVoucher();
 
         String cartId = generateCartId();
-        cashier.addProduct(voucher, cartId);
-        cashier.addProduct(voucher, cartId);
-        Float cartPrice = cashier.addProduct(voucher, cartId);
+        cashier.scan(voucher, cartId);
+        cashier.scan(voucher, cartId);
+        Float cartPrice = cashier.scan(voucher, cartId);
 
         assertEquals(Float.valueOf(10F), cartPrice);
     }
@@ -116,10 +116,10 @@ public class CashierImplTest {
     @Test
     public void should_not_apply_discounts_when_different_products_are_added_and_min_required_quantity_is_not_reached() {
         String cartId = generateCartId();
-        cashier.addProduct(ProductGenerator.getVoucher(), cartId);
-        cashier.addProduct(ProductGenerator.getTshirt(), cartId);
-        cashier.addProduct(ProductGenerator.getTshirt(), cartId);
-        Float cartPrice = cashier.addProduct(ProductGenerator.getPants(), cartId);
+        cashier.scan(ProductGenerator.getVoucher(), cartId);
+        cashier.scan(ProductGenerator.getTshirt(), cartId);
+        cashier.scan(ProductGenerator.getTshirt(), cartId);
+        Float cartPrice = cashier.scan(ProductGenerator.getPants(), cartId);
 
         assertEquals(Float.valueOf(52.5F), cartPrice);
     }
@@ -127,12 +127,12 @@ public class CashierImplTest {
     @Test
     public void should_not_apply_discounts_when_different_products_are_added_and_min_required_quantity_is_reached() {
         String cartId = generateCartId();
-        cashier.addProduct(ProductGenerator.getVoucher(), cartId);
-        cashier.addProduct(ProductGenerator.getVoucher(), cartId);
-        cashier.addProduct(ProductGenerator.getTshirt(), cartId);
-        cashier.addProduct(ProductGenerator.getTshirt(), cartId);
-        cashier.addProduct(ProductGenerator.getTshirt(), cartId);
-        Float cartPrice = cashier.addProduct(ProductGenerator.getPants(), cartId);
+        cashier.scan(ProductGenerator.getVoucher(), cartId);
+        cashier.scan(ProductGenerator.getVoucher(), cartId);
+        cashier.scan(ProductGenerator.getTshirt(), cartId);
+        cashier.scan(ProductGenerator.getTshirt(), cartId);
+        cashier.scan(ProductGenerator.getTshirt(), cartId);
+        Float cartPrice = cashier.scan(ProductGenerator.getPants(), cartId);
 
         assertEquals(Float.valueOf(69.5F), cartPrice);
     }

@@ -22,7 +22,7 @@ public class CashierImpl implements Cashier {
     }
 
     @Override
-    public Float addProduct(Product product, String cartId) {
+    public Float scan(Product product, String cartId) {
         if (product == null || StringUtils.isBlank(cartId))
             throw new InvalidParameterException("Required parameters not present");
 
