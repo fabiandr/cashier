@@ -12,4 +12,8 @@ public class Discount {
     private int maxQuantity;
     private float discountRate;
 
+    public float getProductPriceMultiplier() {
+        return (100-discountRate)/100;
+    }
+
 }
