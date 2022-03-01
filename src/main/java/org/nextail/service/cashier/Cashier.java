@@ -6,6 +6,4 @@ public interface Cashier {
 
     Float addProduct(Product product, String cartId);
 
-    Float getPrice(String cartId);
-
 }
