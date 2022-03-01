@@ -9,6 +9,6 @@ public class Product {
 
     private String code;
     private String name;
-    private float price;
+    private Float price;
 
 }
