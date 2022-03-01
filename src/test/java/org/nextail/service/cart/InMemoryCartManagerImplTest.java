@@ -89,10 +89,23 @@ public class InMemoryCartManagerImplTest {
         cartManager.addProductToCart(ProductGenerator.getTshirt(), currentCartId);
 
         Map<Product, Integer> cartContent = cartManager.getCartContent(currentCartId);
-        Assert.assertEquals(2 ,cartContent.size());
+        Assert.assertEquals(2, cartContent.size());
     }
 
+    @Test
+    public void should_return_correct_cart_products_for_each_cart_when_two_different_carts_are_created_at_same_time() {
+        String firstCartId = UUID.randomUUID().toString();
+        String secondCartId = UUID.randomUUID().toString();
 
+        cartManager.addProductToCart(ProductGenerator.getVoucher(), firstCartId);
+        cartManager.addProductToCart(ProductGenerator.getTshirt(), secondCartId);
+
+        Map<Product, Integer> firstCartContent = cartManager.getCartContent(firstCartId);
+        Map<Product, Integer> secondCartContent = cartManager.getCartContent(secondCartId);
+
+        Assert.assertEquals(ProductGenerator.getVoucher(), firstCartContent.entrySet().stream().findFirst().get().getKey());
+        Assert.assertEquals(ProductGenerator.getTshirt(), secondCartContent.entrySet().stream().findFirst().get().getKey());
+    }
 
     private String generateCartId() {
         return UUID.randomUUID().toString();
